@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org";>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+
+<div>
+    <table id="Viptable" class="table table-striped table-sm" lay-filter="Viptable"></table>
+</div>
+<script th:src="@{/layui/layui.js}"></script>
+<script th:src="@{/layui/admin.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+
+<script type="text/javascript" th:inline="none">
+    $(document).ready(function(){
+        alert(123);
+    });
+    layui.use(['form', 'laypage', 'layer', 'table', 'element'], function(){
+        var form = layui.form
+            ,laypage = layui.laypage //分页
+            ,layer = layui.layer //弹层
+            ,table = layui.table //表格
+            ,element = layui.element; //元素操作
+        table.render({
+            elem: '#Viptable'
+            ,height: 312
+            ,url: '/vip/getVipsByPage' //数据接口
+            ,method: 'get' //默认：get请求
+            ,limit: 3
+            ,limits: [3,10,15]
+            ,page: true//开启分页
+            ,cellMinWidth: 10 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,request: {
+                pageName: 'page' //页码的参数名称，默认：page
+                ,limitName: 'limit' //每页数据量的参数名，默认：limit
+            },response:{
+                statusName: 'code' //数据状态的字段名称，默认：code
+                ,countName: 'count' //数据总数的字段名称，默认：count
+                ,dataName: 'data' //数据列表的字段名称，默认：data
+            }
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'cardNo', title: '会员卡号',width:80}
+                ,{field: 'userName', title: '会员名',width:50}
+                ,{field: 'vipStatus', title: '会员状态'}
+                ,{field: 'sex', title: '会员性别'}
+                ,{field: 'isPermanent', title: '是否永久有效'}
+                ,{field: 'surplusAmount', title: '剩余金额',width:130}
+                ,{title: '操作',width:178, align:'center', toolbar: '#barDemo',width:130}
+            ]],
+            done:function(res, curr, count) {
+                $("[data-field = 'sex']").children().each(function () {
+                    if ($(this).text() == '0') {
+                        $(this).text("男");
+                    } else if ($(this).text() == '1') {
+                        $(this).text("女");
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</html>

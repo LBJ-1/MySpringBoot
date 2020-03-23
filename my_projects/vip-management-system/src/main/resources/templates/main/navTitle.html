@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org";>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+
+<div>
+    <ul class="layui-tab-title top_tab" id="top_tabs">
+        <li class="layui-this" lay-id="">
+            <i class="iconfont icon-computer"></i>
+            <span th:text="${navBarTitle}"></span>
+        </li>
+    </ul>
+</div>
+
+</html>

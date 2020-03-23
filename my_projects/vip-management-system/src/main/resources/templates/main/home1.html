@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org";>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+
+<div>
+    <form id="vipSearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+        <div class="layui-row">
+            <div class="layui-inline">
+                <div style="float: left">
+                    <label class="layui-form-label">会员姓名</label>
+                </div>
+                <div class="layui-input-inline" style="float: left">
+                    <input id="userName" name="userName" placeholder="请输入会员姓名" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+                <div style="float: left;margin-left: 5px">
+                    <label class="layui-form-label">会员卡号</label>
+                </div>
+                <div class="layui-input-inline" style="float: left">
+                    <input id="cardNo" name="cardNo" placeholder="请输入会员卡号" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+                <div class="search-term" style="float: left;margin-left: 15px">
+                    <a class="layui-btn" data-type="reload"><i class="layui-icon" style="font-size: 18px;color:white;">&#xe615;</i>搜索</a>
+                </div>
+<!--                <button class="layui-btn" id="BtnSearchVip" data-type="reload"><i class="layui-icon" style="font-size: 18px;color:white;">&#xe615;</i>搜索</button>-->
+                <button type="reset" class="layui-btn" style="margin-left: 3px"><i class="layui-icon" style="font-size: 18px;color:white;">&#x1006;</i>重置</button>
+            </div>
+        </div>
+
+    </form>
+    <table id="Viptable" class="table table-striped table-sm" lay-filter="Viptable"></table>
+</div>
+
+<script type="text/javascript">
+    // 子页面加载layui会报错...还是用这个方法吧...
+    window.parent.doTable();
+</script>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button class="layui-btn layui-btn-sm" lay-event="reload">重载</button>
+    </div>
+</script>
+</html>
